@@ -10,13 +10,14 @@
 #
 ###########
 
-DEPS=`whereis xmlstarlet`
-if [ "$?" -ne 0 ]; then
+DEPS=`whereis xmlstarlet | awk {'print $2'}`
+if [ -z $DEPS ]; then
         echo "install xmlstarlet"
         exit 1
 fi
-DEPS=`whereis curl`
-if [ "$?" -ne 0 ]; then
+
+DEPS=`whereis curl | awk {'print $2'}`
+if [ -z $DEPS ]; then
         echo "install curl"
         exit 1
 fi
