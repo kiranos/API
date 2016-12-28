@@ -10,6 +10,7 @@
 #
 ###########
 
+
 DEPS=`whereis xmlstarlet | awk {'print $2'}`
 if [ -z $DEPS ]; then
         echo "install xmlstarlet"
@@ -75,7 +76,15 @@ if [[ "$1" = "deploy_cert" ]]; then
     DONE="yes"
 fi
 
-rm -f /tmp/api-log.xml
+if [[ "$1" = "unchanged_cert" ]]; then
+    echo "Certificate for domain $DOMAIN is still valid - no action taken"
+    DONE="yes"
+fi
+
+#Remove tmp logfile
+if [ -f /tmp/api-log.xml ] ; then
+    rm /tmp/api-log.xml
+fi
 
 if [[ ! "$DONE" = "yes" ]]; then
     echo Unkown hook "$1"
