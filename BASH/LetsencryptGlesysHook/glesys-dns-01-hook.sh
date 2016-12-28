@@ -10,7 +10,6 @@
 #
 ###########
 
-
 DEPS=`whereis xmlstarlet | awk {'print $2'}`
 if [ -z $DEPS ]; then
         echo "install xmlstarlet"
